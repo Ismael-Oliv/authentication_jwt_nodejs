@@ -7,6 +7,6 @@ const routes = Router();
 const authenticationUsersController = new AuthenticationUsersController();
 const createUsersController = new CreateUsersController();
 routes.post("/user/login", authenticationUsersController.execute);
-routes.post("user/create", createUsersController.create);
+routes.post("/user/create", createUsersController.create);
 
 export { routes };

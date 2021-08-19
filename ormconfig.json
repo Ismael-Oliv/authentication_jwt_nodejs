@@ -5,7 +5,7 @@
   "username": "postgres",
   "password": "docker",
   "database": "authentication_jwt_nodejs_databse",
-  "entities": ["./src/database/entities*.ts"],
+  "entities": ["./src/database/entities/*.ts"],
   "migrations": ["./src.database/migrations/*.ts"],
 
   "cli": {
