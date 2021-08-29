@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    container_name: db_test
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: authentication_jwt_nodejs_databse
+    volumes:
+      - db_test:/data/postgres
+
+  api:
+    container_name: api_test
+    build: .
+    ports:
+      - 3001:3001
+    volumes:
+      - .:/usr/app
+
+networks:
+  default:
+
+volumes:
+  db_test:

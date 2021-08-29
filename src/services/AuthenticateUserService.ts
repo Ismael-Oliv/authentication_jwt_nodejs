@@ -4,35 +4,35 @@ import { UsersRepository } from "../database/repository/UsersRepository";
 import Auth from "../config/auth";
 
 interface IUserData {
-   email: string;
-   password: string;
+  email: string;
+  password: string;
 }
 
 const usersRepository = new UsersRepository();
 export class AuthenticateUsersSerivce {
-   public async execute({ email, password }: IUserData) {
-      const user = await usersRepository.FindByEmail(email);
+  public async execute({ email, password }: IUserData) {
+    const user = await usersRepository.FindByEmail(email);
 
-      if (!user) {
-         throw new Error("Incorrect gave credentials");
-      }
+    if (!user) {
+      throw new Error("Incorrect gave credentials");
+    }
 
-      const matchedPassword = compare(password, user.password);
+    const matchedPassword = compare(password, user.password);
 
-      if (!matchedPassword) {
-         throw new Error("Incorrect gave credentials");
-      }
+    if (!matchedPassword) {
+      throw new Error("Incorrect gave credentials");
+    }
 
-      const { secret, expiresIn } = Auth.jwt;
+    const { secret, expiresIn } = Auth.jwt;
 
-      const token = sign({}, secret, {
-         subject: user.id,
-         expiresIn,
-      });
+    const token = sign({}, secret, {
+      subject: user.id,
+      expiresIn,
+    });
 
-      return {
-         user,
-         token,
-      };
-   }
+    return {
+      user,
+      token,
+    };
+  }
 }
