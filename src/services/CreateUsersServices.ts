@@ -1,8 +1,6 @@
 import { hash } from 'bcryptjs';
-
 import { Users } from '../database/entities/Users';
-import { UsersRepository } from '../database/repository/UsersRepository';
-import { IUsersRespository } from 'database/repository/IUsersRepository';
+import { IUsersRespository } from 'repositories/IUsersRepository';
 
 interface ICreateUser {
   username: string;
