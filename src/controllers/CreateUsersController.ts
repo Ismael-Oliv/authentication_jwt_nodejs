@@ -1,10 +1,13 @@
-import { Request, Response } from "express";
-import { CreateUsersService } from "../services/CreateUsersServices";
+import { Request, Response } from 'express';
+import { CreateUsersService } from '../services/CreateUsersServices';
+import { UsersRepository } from '../database/repository/UsersRepository';
 
-const createUsersService = new CreateUsersService();
 export class CreateUsersController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { username, email, password } = request.body;
+
+    const usersRepository = new UsersRepository();
+    const createUsersService = new CreateUsersService(usersRepository);
 
     const user = await createUsersService.create({
       username,

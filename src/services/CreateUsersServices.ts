@@ -1,7 +1,8 @@
-import { hash } from "bcryptjs";
+import { hash } from 'bcryptjs';
 
-import { Users } from "../database/entities/Users";
-import { UsersRepository } from "../database/repository/UsersRepository";
+import { Users } from '../database/entities/Users';
+import { UsersRepository } from '../database/repository/UsersRepository';
+import { IUsersRespository } from 'database/repository/IUsersRepository';
 
 interface ICreateUser {
   username: string;
@@ -10,28 +11,26 @@ interface ICreateUser {
 }
 
 export class CreateUsersService {
+  constructor(private repository: IUsersRespository) {}
+
   public async create({
     username,
     email,
     password,
   }: ICreateUser): Promise<Users> {
-    const usersRepository = new UsersRepository();
-
-    const Existentuser = await usersRepository.FindByEmail(email);
+    const Existentuser = await this.repository.FindByEmail(email);
 
     if (Existentuser) {
-      throw new Error("User already exists");
+      throw new Error('User already exists');
     }
 
     const hashedPassword = await hash(password, 8);
 
-    const user = await usersRepository.create({
+    const user = await this.repository.create({
       username,
       email,
       password: hashedPassword,
     });
-
-    console.log(user);
 
     return user;
   }
