@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { AuthenticateUsersSerivce } from '../services/AuthenticateUserService';
-import { UsersRepository } from '../database/repository/UsersRepository';
+import { AuthenticateUsersSerivce } from '../../../services/AuthenticateUserService';
+import { UsersRepository } from '../../typeorm/repository/UsersRepository';
 
 export class AuthenticationUsersController {
   public async execute(

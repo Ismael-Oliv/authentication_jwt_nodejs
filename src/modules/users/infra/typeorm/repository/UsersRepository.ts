@@ -1,5 +1,5 @@
-import { getRepository } from "typeorm";
-import { Users } from "../entities/Users";
+import { getRepository } from 'typeorm';
+import { Users } from '../entities/Users';
 
 interface ICreateUser {
   username: string;

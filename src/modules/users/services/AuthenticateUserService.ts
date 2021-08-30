@@ -1,6 +1,6 @@
 import { sign } from 'jsonwebtoken';
 import { compare } from 'bcryptjs';
-import Auth from '../config/auth';
+import Auth from '../../../config/auth';
 import { IUsersRespository } from '../repositories/IUsersRepository';
 
 interface IUserData {

@@ -1,4 +1,4 @@
-import { Users } from 'database/entities/Users';
+import { Users } from 'modules/users/infra/typeorm/entities/Users';
 
 interface IUser {
   username: string;

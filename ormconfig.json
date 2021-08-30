@@ -5,10 +5,10 @@
   "username": "postgres",
   "password": "docker",
   "database": "authentication_jwt_nodejs_databse",
-  "entities": ["./src/database/entities/*.ts"],
-  "migrations": ["./src.database/migrations/*.ts"],
+  "entities": ["./src/modules/**/infra/type/entities/*.ts"],
+  "migrations": ["./src/modules/shared/infra/typeorm/migrations/*.ts"],
 
   "cli": {
-    "migrationsDir": "./src.database/migrations"
+    "migrationsDir": "./src/modules/shared/infra/typeorm/migrations"
   }
 }
