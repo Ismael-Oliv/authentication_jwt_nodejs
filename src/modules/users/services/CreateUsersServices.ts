@@ -1,6 +1,6 @@
 import { hash } from 'bcryptjs';
 import { Users } from '../infra/typeorm/entities/Users';
-import { IUsersRespository } from 'modules/users/repositories/IUsersRepository';
+import { IUsersRespository } from '../repositories/IUsersRepository';
 
 interface ICreateUser {
   username: string;

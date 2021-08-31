@@ -1,9 +1,9 @@
-version: '3.7'
+version: '3.9'
 
 services:
-  db:
+  database:
     image: postgres
-    container_name: db_test
+    container_name: db_authentication
     restart: always
     ports:
       - 5432:5432
@@ -12,18 +12,25 @@ services:
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: authentication_jwt_nodejs_databse
     volumes:
-      - db_test:/data/postgres
+      - data_db_authentication:/data/postgres
 
   api:
-    container_name: api_test
     build: .
+    container_name: api_authentication
+    restart: always
     ports:
       - 3001:3001
+      - 9229:9229
+    working_dir: /usr/app
     volumes:
       - .:/usr/app
 
-networks:
-  default:
+    links:
+      - database
+    depends_on:
+      - database
+    command: ['./wait-for-it.sh', 'database:5432', '--', 'npm', 'run', 'dev']
 
 volumes:
-  db_test:
+  data_db_authentication:
+    driver: local

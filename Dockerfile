@@ -1,10 +1,12 @@
-FROM node:14
+FROM node
 
-WORKDIR /usr/app/
+WORKDIR /usr/app
 
 COPY package.json package.json
 
 RUN npm install
+
+EXPOSE 3001
 
 COPY . .
 
