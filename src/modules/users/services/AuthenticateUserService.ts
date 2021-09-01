@@ -2,19 +2,14 @@ import { sign } from 'jsonwebtoken';
 import { compare } from 'bcryptjs';
 import Auth from '../../../config/auth';
 import { IUsersRespository } from '../repositories/IUsersRepository';
-import { inject, injectable } from 'tsyringe';
 
 interface IUserData {
   email: string;
   password: string;
 }
 
-@injectable()
 export class AuthenticateUsersSerivce {
-  constructor(
-    @inject('UsersRepository')
-    private userRespository: IUsersRespository
-  ) {}
+  constructor(private userRespository: IUsersRespository) {}
 
   public async execute({ email, password }: IUserData) {
     const user = await this.userRespository.FindByEmail(email);
