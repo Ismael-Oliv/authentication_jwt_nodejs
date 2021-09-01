@@ -18,7 +18,7 @@ export class AuthenticateUsersSerivce {
       throw new Error('Incorrect gave credentials');
     }
 
-    const matchedPassword = compare(password, user.password);
+    const matchedPassword = await compare(password, user.password);
 
     if (!matchedPassword) {
       throw new Error('Incorrect gave credentials');
