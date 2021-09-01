@@ -18,7 +18,7 @@ A primeira coisa que devemos fazer é baixar a aplicação, para fazer isso vamo
 
 ` cd authentication_jwt_nodejs`
 
-Agora que estamos dentro da pasta da aplicação vamos inicia-lo
+Agora que estamos dentro da pasta da aplicação vamos inicia-la
 
 Existem três maneiras para iniciar a aplicação:
 
@@ -30,3 +30,10 @@ Existem três maneiras para iniciar a aplicação:
 
 ​	Além da necessidade de ter o <a href="https://docs.docker.com/engine/install/">Docker</a> instalado, executar o seguinte comando `docker run --name postgres -e POSTGRES_PASSWORD=docker -d postgres`
 
+
+
+## Testes
+
+Para executar os teste basta executar o seguinte comando:
+
+`yarn test` ou `npm run test`
