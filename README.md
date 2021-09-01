@@ -37,3 +37,10 @@ Existem três maneiras para iniciar a aplicação:
 Para executar os teste basta executar o seguinte comando:
 
 `yarn test` ou `npm run test`
+
+Dentro da pasta *coverage/lcov-report* abara o arquivo *index.html* para visualizar o status
+
+
+
+![./assets/status_teste.png](assets/status_teste.png)
+
