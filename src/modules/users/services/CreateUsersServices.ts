@@ -1,4 +1,4 @@
-import { hash } from 'bcryptjs';
+import { IHashProvider } from '../providers/HashProvider/Models/IHashProvider';
 import { Users } from '../infra/typeorm/entities/Users';
 import { inject, injectable } from 'tsyringe';
 import { IUsersRespository } from '../repositories/IUsersRepository';
@@ -13,7 +13,10 @@ interface ICreateUser {
 export class CreateUsersService {
   constructor(
     @inject('UsersRepository')
-    private repository: IUsersRespository
+    private repository: IUsersRespository,
+
+    @inject('IHashProvider')
+    private hashProvider: IHashProvider
   ) {}
 
   public async create({
@@ -27,7 +30,7 @@ export class CreateUsersService {
       throw new Error('User already exists');
     }
 
-    const hashedPassword = await hash(password, 8);
+    const hashedPassword = await this.hashProvider.generateHash(password);
 
     const user = await this.repository.create({
       username,

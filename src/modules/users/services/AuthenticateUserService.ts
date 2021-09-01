@@ -1,6 +1,6 @@
 import { sign } from 'jsonwebtoken';
-import { compare } from 'bcryptjs';
 import { injectable, inject } from 'tsyringe';
+import { IHashProvider } from '../providers/HashProvider/Models/IHashProvider';
 import Auth from '../../../config/auth';
 import { IUsersRespository } from '../repositories/IUsersRepository';
 
@@ -13,7 +13,10 @@ interface IUserData {
 export class AuthenticateUsersSerivce {
   constructor(
     @inject('UsersRepository')
-    private userRespository: IUsersRespository
+    private userRespository: IUsersRespository,
+
+    @inject('IHashProvider')
+    private hashProvider: IHashProvider
   ) {}
 
   public async execute({ email, password }: IUserData) {
@@ -23,7 +26,10 @@ export class AuthenticateUsersSerivce {
       throw new Error('Incorrect gave credentials');
     }
 
-    const matchedPassword = await compare(password, user.password);
+    const matchedPassword = await this.hashProvider.compareHash(
+      password,
+      user.password
+    );
 
     if (!matchedPassword) {
       throw new Error('Incorrect gave credentials');
