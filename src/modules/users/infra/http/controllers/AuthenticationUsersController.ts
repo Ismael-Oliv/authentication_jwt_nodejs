@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { AuthenticateUsersSerivce } from '../../../services/AuthenticateUserService';
-import { UsersRepository } from '../../typeorm/repository/UsersRepository';
+import { container } from 'tsyringe';
 
 export class AuthenticationUsersController {
   public async execute(
@@ -9,9 +9,8 @@ export class AuthenticationUsersController {
   ): Promise<Response> {
     const { email, password } = request.body;
 
-    const usersRepository = new UsersRepository();
-    const authenticateUsersSerivce = new AuthenticateUsersSerivce(
-      usersRepository
+    const authenticateUsersSerivce = container.resolve(
+      AuthenticateUsersSerivce
     );
     const { token, user } = await authenticateUsersSerivce.execute({
       email,
